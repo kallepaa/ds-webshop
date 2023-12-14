@@ -46,8 +46,20 @@ Because messaging between the client and backend services is asynchronous, the c
 
 ### Syncronous messaging 
 
+Between the client and Public Front, all messages can be considered to be synchronous, even though the client can utilize asynchronicity by executing calls in a different thread. Another way to say this is that the client will expect to receive some kind of response from the Public Front. 
 
-###
+The Public Front exposes services over the HTTP protocol, and response message headers always contain an HTTP response code that the client can use to identify either success or failure. If the request fails, the client can send the request again until the request is successful. This is one of the consensus agreements between the client and the system. This also applies to synchronous messaging between the Public Front and backend services when the Public Front impersonates the client and makes calls to the back-end service on behalf of the original client.
+
+### Asyncronous messaging 
+
+The Public Front acts as a facade on top of the system. It is the top layer in the system and the only layer exposed outside. Communication with the Public Front is synchronous in nature, but communication inside the system is partly asynchronous.
+
+Asynchronicity is implemented by using a middleware system called the Message Bus. The Message Bus's responsibility is to provide a reliable messaging channel between nodes. The Message Bus does not contain any domain logic.
+
+The Message Bus uses the MQTT protocol, and the protocol provides three different QoS levels for message deliveries. The 0-level does not guarantee that the message is received by the Message Bus. The 1-level guarantees that the message is received by the Message Bus at least once. The 2-level guarantees message delivery only once. As the level of QoS increases, the performance of messaging decreases.
+
+Our system uses 1-Level QoS in messaging. All published messages will receive acknowledgment from the Message Bus, indicating that the Message Bus has received the message. If the Message Bus does not send acknowledgment to the sender, the sender will resend the message until it receives acknowledgment from the Message Bus. This could lead to multiple copies of messages in the case that the Message Bus has received the message, but the acknowledgment has been lost. Therefore, all system subsystems that are subscribing to messages should handle the situation when the same message is received more than once.
+
 
 
 
