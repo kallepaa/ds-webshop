@@ -1,9 +1,7 @@
 
-## ABSTRACT
+##  The project’s goal and the design principles
 
 One of the requirements for the project was to have at least three nodes that exchange information between each other via messaging. Also, the system's global state shall be distributed to different nodes.
-
-## INTRODUCTION
 
 ![Figure 1](communication-req.png)
 **Figure 1** The system consists of 3 nodes: public front, inventory, and order. Each node exchanges information with each other synchronously and asynchronously.
@@ -64,6 +62,8 @@ Our system use 1-Level QoS in messaging. All published messages will receive ack
 
 The system state is distributed between nodes in two different ways. Backend services Inventory and Order persist the state of the inventory, reservations, and the orders. This makes the services stateful even though the services themselves are stateless. However, Public Front is fully stateless but uses backend services to build the state of the inventory and orders on demand. We could build a caching mechanism into the Public Front, and it could make sense. Also, we could build the Public Front so that it subscribes to events from the Message Bus when the order submission process is finished and notifies the client via a WebSocket channel. This would make the Public Front have state, but it would also add more complexity, for example from a recovery perspective.
 
+## Functionalities
+
 ### Synchronization and consistency
 
 Synchronization and consistency are built into the application and system design. The client will eventually be consistent with the rest of the system by polling the system status. Backend services will be consistent eventually. Because in the backend, messages are passed between services asynchronously via the message bus, the messages could be delivered in the incorrect order.
@@ -72,6 +72,31 @@ Synchronization and consistency are built into the application and system design
 
 Because the Message Bus cannot guarantee message delivery order, the messages can be delivered in the incorrect order to backend services. This will lead to conflicts that should be resolved automatically. One example of such a conflict is when the Inventory publishes a message 'in-stock,' and the Order service starts to handle the message before the order is found in the Order service database. These situations are solved automatically by retry action because, in most cases, it could be assumed that the order-sent message will arrive in a few milliseconds.
 
+### Naming and node discovery
+
+The Public Front is the only service visible to clients. The Public Front will have its own address, which is found in the DNS system. In case the Public Front is scaled horizontally, the load balancer or reverse proxy has knowledge about the unique IP addresses of the Public Front nodes, and the client still only needs a single address.
+
+Because the Public Front needs to know the addresses of the Inventory and the Order services, the addresses of those services are configured in the Public Front configuration. Address translation to IP addresses is done by DNS. If backend services are scaled horizontally, then a load balancer is needed between the Public Front and the backend services. Then all the Public Front instances will be configured to call the load balancer instead of directly calling backend services.
+
+The Message Bus used in this project is a cloud service, and we assume it has elastic scalability. However, our system, as a client, can rely on a single address. This address is configured in each service's configuration file. The Inventory and the Order services do not need to know each other's addresses because all messages between them go through the Message Bus.
+
+### Fault tolerance and recovery
+
+Because the Public Front and backend services are stateless, they support elastic scalability and, therefore, provide high availability in case of traffic increases and server failures.
+
+The prototype database engine is SQLite, which might not be suitable for production use. For production use, existing commercial database engines that provide the necessary fault tolerance to the system should be considered.
+
+Service recovery is as simple as booting up a new server, installing the service, and starting the service. This is possible because services are stateless, and there is no need to rebuild state.
+
+Fault tolerance and recovery still need a system that monitors each service and reacts to server or service failures. The same system can also control elasticity by starting and shutting down the services. Monitoring can be done using for example heart beats to check each service health. In our prototype, we did not implement such a system.
+
+### Scalability
+
+The Public Front and backend services are stateless, except backend databases. The services scale horizontaly as needed. Replication can be used for databases scaling.
+
+### Perfomance
+
+The scalability of the system is the basis for increasing system performance. In case the system is used globally, distributing the system closer to end-users in different regions should reduce latency between the client and the Public Front.
 
 
 ## Repositories
