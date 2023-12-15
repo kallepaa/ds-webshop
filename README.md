@@ -92,15 +92,10 @@ Fault tolerance and recovery still need a system that monitors each service and 
 
 ### Scalability
 
-**Services**
+In ensuring the scalability of our system, we prioritize key architectural elements. The Public Front and backend services embody statelessness, a deliberate design choice that facilitates horizontal scaling as needed. Although the backend databases differ by maintaining state, we can ensure scalability through replication. Maintaining the consistency of those replicas can be done synchronously, meaning that changes are committed to all replicas before confirming the transaction.
+To further optimize system performance, caching mechanisms are strategically employed, focusing on storing frequently accessed data in memory particularly beneficial for optimizing the reading of the catalog.
+Mosquitto's broker can be scaled horizontally via its bridge capability, facilitating the replication of messages across multiple brokers. This feature is especially valuable for creating distributed and scalable MQTT infrastructures. Through the establishment of bridges between brokers, one broker can seamlessly copy messages to another, forming an interconnected network of brokers. This network collectively manages and distributes message traffic.
 
-The Public Front and backend services are stateless, except backend databases. The services scale horizontaly as needed. 
-
-**Databases**
-
-Replication can be used for databases scaling. 
-
-**Message Bus**
 
 
 
