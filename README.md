@@ -6,7 +6,7 @@
 
 After a discussion with the professor subsequent to the evaluation and grading of the design plan, the following agreements were reached :
 
-* Removal of Shipping and Payment services/nodes 
+* Removal of Shipping and Payment services/nodes
 * No implementation of the frontend, only client server was  implemented.
 
 
