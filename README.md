@@ -92,7 +92,17 @@ Fault tolerance and recovery still need a system that monitors each service and 
 
 ### Scalability
 
-The Public Front and backend services are stateless, except backend databases. The services scale horizontaly as needed. Replication can be used for databases scaling.
+**Services**
+
+The Public Front and backend services are stateless, except backend databases. The services scale horizontaly as needed. 
+
+**Databases**
+
+Replication can be used for databases scaling. 
+
+**Message Bus**
+
+
 
 ### Perfomance
 
