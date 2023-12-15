@@ -113,6 +113,10 @@ Caching Mechanisms: Implementing caching mechanisms can significantly enhance pe
 
 Scalable Messaging Infrastructure: A scalable messaging infrastructure enables efficient message distribution and replication. This enhance performance by reducing message delivery times and ensuring reliable communication across the system.
 
+## The key enablers and the lessons learned during the development of the project.
+In putting our project into action, we directly applied class knowledge. We covered the ins and outs of distributed systems, learned the basics of ensuring communication between nodes, and underands the roles of synchronization and the Public Front, which serves as our system's load balancer. Hands-on experience included using the Publish Subscribe Event Coordinator via the MQTT message broker, introducing us to asynchronous communication and event-driven setups. Dealing with consistency in a distributed system, particularly with data when scaling up led us to think about various techniques.
+We also thought and learnt about different algorithms for ensuring consensus among nodes and handling fault tolerance, scalability, and performance. Classroom lectures loaded us up with algorithms and techniques for managing core functionalities of distributed systems, helping us make informed decisions based on project requirements. Beyond tech skills, the project honed essential abilities like time management, teamwork, and cooperative learning, providing a well-rounded learning experience beyond just coding.
+
 ## Group members and participation
 In our group, all three of us actively participated and contributed equally to the project. We collaborated closely, providing support and assistance to one another throughout the development process. We divided the work tasks in a way that each member was responsible for managing and implementing specific nodes within the system architecture. This division of tasks allowed us to work efficiently and effectively. Considering the balanced distribution of work and the contribution od each one of us, We all think that the points collected should be split evenly.
 ## Repositories
