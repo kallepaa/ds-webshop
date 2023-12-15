@@ -104,9 +104,7 @@ To further optimize system performance, caching mechanisms will be strategically
 The scalability of our Mosquitto message queue broker can be done using its bridge capability, which allows replication of messages across multiple brokers. With bridges between these brokers, messages can be duplicated seamlessly, forming a connected network. Then this network of linked brokers will collaboratively manage and distribute the flow of messages to ensure efficient communication.
 
 
-
-
-### Perfomance
+### Performance
 
 The scalability measures implemented in our system have a direct impact on its performance it is the basis for increasing system performance.
 
