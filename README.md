@@ -101,9 +101,15 @@ The scalability of our Mosquitto message queue broker can be done using its brid
 
 ### Perfomance
 
-The scalability of the system is the basis for increasing system performance. In case the system is used globally, distributing the system closer to end-users in different regions should reduce latency between the client and the Public Front.
+The scalability measures implemented in our system have a direct impact on its performance it is the basis for increasing system performance.
 
+Horizontal Scaling: By enabling horizontal scaling through stateless front and backend services, the system can handle increased user load and traffic, leading to improved performance. Also the servers can be added to distribute the workload, resulting in faster response times and minimal downtime.
 
+Database Replication: Replicating databases helps ensure data availability and reliability. It allows for load distribution and fault tolerance, which  will impact performance. Users can access data from the nearest replica, reducing latency and improving response times.
+
+Caching Mechanisms: Implementing caching mechanisms can significantly enhance performance by storing frequently accessed data in memory. This reduces the need for repeated processing and database queries, which result in faster data retrieval and improved overall system responsiveness.
+
+Scalable Messaging Infrastructure: A scalable messaging infrastructure enables efficient message distribution and replication. This enhance performance by reducing message delivery times and ensuring reliable communication across the system.
 ## Repositories
 
 * [Public Front](https://github.com/bendah123/Public_Front)
