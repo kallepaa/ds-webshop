@@ -93,8 +93,8 @@ Fault tolerance and recovery still need a system that monitors each service and 
 ### Scalability
 
 In ensuring the scalability of our system, we prioritize key architectural elements. The Public Front and backend services embody statelessness, a deliberate design choice that facilitates horizontal scaling as needed. Although the backend databases differ by maintaining state, we can ensure scalability through replication. Maintaining the consistency of those replicas can be done synchronously, meaning that changes are committed to all replicas before confirming the transaction.
-To further optimize system performance, caching mechanisms are strategically employed, focusing on storing frequently accessed data in memory particularly beneficial for optimizing the reading of the catalog.
-The scalability of our Mosquitto message queue broker can be done using its bridge capability, which allows replication of messages across multiple brokers. With bridges between these brokers, messages can be duplicated seamlessly, forming a connected network.Then this network of linked brokers will collaboratively manage and distribute the flow of messages to ensure efficient communication handling.
+To further optimize system performance, caching mechanisms will be strategically employed, focusing on storing frequently accessed data in memory particularly beneficial for optimizing the reading of the catalog.
+The scalability of our Mosquitto message queue broker can be done using its bridge capability, which allows replication of messages across multiple brokers. With bridges between these brokers, messages can be duplicated seamlessly, forming a connected network.Then this network of linked brokers will collaboratively manage and distribute the flow of messages to ensure efficient communication.
 
 
 
