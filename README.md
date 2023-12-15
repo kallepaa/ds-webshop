@@ -112,7 +112,8 @@ Database Replication: Replicating databases helps ensure data availability and r
 Caching Mechanisms: Implementing caching mechanisms can significantly enhance performance by storing frequently accessed data in memory. This reduces the need for repeated processing and database queries, which result in faster data retrieval and improved overall system responsiveness.
 
 Scalable Messaging Infrastructure: A scalable messaging infrastructure enables efficient message distribution and replication. This enhance performance by reducing message delivery times and ensuring reliable communication across the system.
-##Groupe members and participation
+
+## Group members and participation
 In our group, all three of us actively participated and contributed equally to the project. We collaborated closely, providing support and assistance to one another throughout the development process. We divided the work tasks in a way that each member was responsible for managing and implementing specific nodes within the system architecture. This division of tasks allowed us to work efficiently and effectively. Considering the balanced distribution of work and the contribution od each one of us, We all think that the points collected should be split evenly.
 ## Repositories
 
